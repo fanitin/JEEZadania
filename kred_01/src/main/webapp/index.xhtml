@@ -3,25 +3,39 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Pierwsza aplikacja JSF (uniwersalne ziarna CDI)</title>
 </h:head>
 <h:body>
 
-	<h1>Pierwsza aplikacja JSF (uniwersalne ziarna CDI)</h1>
-
-	<h:form id="bla">
-  		Pdaj kwotę: <h:inputText value="#{kredBB.kwota}" />
-		<br />
-  		Podaj oprocentowanie: <h:inputText value="#{kredBB.oprocentowanie}" />
-		<br />
-		Podaj liczbę lat: <h:inputText value="#{kredBB.years}" />
-		<br />
-		<h:messages id="msg" />
-
-		<h:commandButton value="Dodaj" action="#{kredBB.calc()}"/>
-	</h:form>
-
+	<p:panel header="Pierwsza aplikacja JSF (uniwersalne ziarna CDI)" style="margin:1em auto">
+		<h:form id="bla">
+			<h5>Podaj kwotę:</h5>
+			<span class="ui-float-label"> <p:inputText id="kwota-input"
+					value="#{kredBB.kwota}" required="true" /> <p:outputLabel
+					for="kwota-input" value="Kwota" /> <p:message for="kwota-input" />
+			</span>
+			<h5>Podaj oprocentowanie:</h5>
+			<span class="ui-float-label"> <p:inputText
+					id="oprocentowanie-input" value="#{kredBB.oprocentowanie}"
+					required="true" /> <p:outputLabel for="oprocentowanie-input"
+					value="Oprocentowanie" /> <p:message for="oprocentowanie-input" />
+			</span>
+			<h5>Podaj liczbę lat:</h5>
+			<span class="ui-float-label"> <p:inputText
+					id="liczbaLat-input" value="#{kredBB.years}" required="true" /> <p:outputLabel
+					for="liczbaLat-input" value="Liczba lat" /> <p:message
+					for="liczbaLat-input" />
+			</span>
+			<br />
+			<p:commandButton value="Dodaj" styleClass="rounded-button"
+				action="#{kredBB.calc()}" />
+			<p:messages id="msg" closable="true">
+				<p:autoUpdate />
+			</p:messages>
+		</h:form>
+	</p:panel>
 </h:body>
 </html>

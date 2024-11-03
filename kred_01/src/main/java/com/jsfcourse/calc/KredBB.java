@@ -14,7 +14,7 @@ public class KredBB {
 	private String kwota;
 	private String oprocentowanie;
 	private String years;
-	private float rata;
+	private Double rata;
 	
 
 	public String getKwota() {
@@ -41,11 +41,11 @@ public class KredBB {
 		this.years = years;
 	}
 
-	public float getRata() {
+	public Double getRata() {
 		return rata;
 	}
 
-	public void setRata(float rata) {
+	public void setRata(Double rata) {
 		this.rata = rata;
 	}
 
@@ -58,7 +58,8 @@ public class KredBB {
 			double oprocentowanie = Double.parseDouble(this.oprocentowanie);
 			double years = Double.parseDouble(this.years);
 
-			kwota = (kwota+(kwota*oprocentowanie/100))/years*12;
+			rata = (kwota+(kwota*oprocentowanie/100))/(years*12);
+			rata = Math.round(rata * 100.0) / 100.0;
 
 			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Operacja wykonana poprawnie", null));
 			return true;
@@ -69,10 +70,10 @@ public class KredBB {
 		}
 	}
 
-	// Go to "showresult" if ok
+	
 	public String calc() {
 		if (doTheMath()) {
-			return "showresult";
+			ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Wynik: " + rata, null));
 		}
 		return null;
 	}
